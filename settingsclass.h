@@ -9,7 +9,6 @@ public:
     int getLocalProgramVersion(){return m_localProgramVersion;}
     int getUpdateVersion(){return m_updateVersion;}
     QString getServerAdress(){return m_serverAdress;}
-    QStringList getFileList(){return m_fileList;}
     QString getProgramPath(){return m_curentDerectory;}
     QString getUrlAdressProgram(){return m_urlProgram;}
     QStringList getUrlAdressPatterns(){return m_urlPatterns;}
@@ -23,7 +22,6 @@ public:
     void setLocalProgramVersion(int value){m_localProgramVersion = value;}
     void setUpdateVersion(int value){m_updateVersion = value;}
     void setServerAdress(QString value){m_serverAdress = value;}
-    void setFileList(QStringList list){m_fileList = list;}
     void setProgramPath(QString value){m_curentDerectory = value;}
     void setUrlAdresProgram(QString value){m_urlProgram = value;}
     void setUrlAdresPatterns(QStringList value){m_urlPatterns = value;}
@@ -37,7 +35,6 @@ private:
     int m_localProgramVersion;
     int m_updateVersion;
     QString m_serverAdress;
-    QStringList m_fileList;
     QString m_curentDerectory;
     QString m_urlProgram;
     QStringList m_urlPatterns;

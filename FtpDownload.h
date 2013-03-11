@@ -17,7 +17,7 @@ class FtpDownload : public QObject
 
 public:
     FtpDownload(QObject *parent = 0);
-    void downloadFile(QString fileName, QString curPath);
+    void downloadFile(QString fileName,QString curPath ,QString directory = "");
     void connectToServer(QString server,QString login,QString pass);
     void disconectFromServer();
 

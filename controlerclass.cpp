@@ -62,7 +62,7 @@ void ControlerClass::onTimer()
     if(m_FtpDownloader.fileIsDownload)
     {
         timer->stop();
-        if(isDowloadProgram) m_curentDownload++;
+        //if(isDowloadProgram) m_curentDownload++;
         isDowloadProgram = true;
         downloadFile();
     }
@@ -185,8 +185,9 @@ void ControlerClass::downloadFile()
            return;
 
        }
-
-       m_FtpDownloader.downloadFile(m_downloadList.at(m_curentDownload),m_Settings->m_Options.getAbsPath()+"/tamplates/");
+       m_FtpDownloader.downloadFile(m_downloadList.at(m_curentDownload),m_Settings->m_Options.getAbsPath(),"/tamplates/");
+       //m_FtpDownloader.downloadFile(m_Settings->m_Options.getProgramPath()+"/tamplates/"+m_downloadList.at(m_curentDownload),m_Settings->m_Options.getAbsPath()+"/tamplates/");
+       m_curentDownload++;
        timer->start(1);
 
 }

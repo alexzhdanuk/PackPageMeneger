@@ -11,36 +11,42 @@ SettingsClass::SettingsClass()
     m_Options.setUpdateVersion(200);
     m_filePath = "settings.ini";
     QStringList list;
-    m_Options.setFileList(list);
     m_Options.setLogin("zmey");
     m_Options.setPass("14101989");
     m_Options.setFtpserver("sms-feed.apricus.pp.ua");
-    m_Options.setUrlAdresProgram("Photobook.exe");
+    m_Options.setUrlAdresProgram("index.php");
     m_Options.setProgramPath("./www/sms-feed.apricus.pp.ua/fotobook");
     m_Options.setAbsPath("./www/sms-feed.apricus.pp.ua/fotobook");
     list.clear();
     list <<"ssssss.sb";
 
     m_Options.setUrlAdresPatterns(list);
+    list.clear();
+    list << "index.php";
+    m_Options.setDelList(list);
+    loadSettings();
 }
 
 bool SettingsClass::loadSettings()
 {
     QFile file(m_filePath);
+
+    if (!QFile::exists(m_filePath))
+
+        return false;
     if(file.open(QIODevice::ReadWrite))
     {
         QString server,path,program;
-        QStringList list1,list2;
+        QStringList list;
         int programVersion,updateVersion;
         QDataStream in(&file);
-        in >> programVersion >> server >> updateVersion >> list1 >> path >> program >> list2;
+        in >> programVersion >> server >> updateVersion >> path >> program >> list;
         m_Options.setLocalProgramVersion(programVersion);
         m_Options.setServerAdress(server);
         m_Options.setUpdateVersion(updateVersion);
-        m_Options.setFileList(list1);
         m_Options.setProgramPath(path);
         m_Options.setUrlAdresProgram(program);
-        m_Options.setUrlAdresPatterns(list2);
+        m_Options.setUrlAdresPatterns(list);
     }
     file.close();
     return true;
@@ -55,7 +61,6 @@ bool SettingsClass::saveSettings()
         out << m_Options.getLocalProgramVersion()
             << m_Options.getServerAdress()
             << m_Options.getUpdateVersion()
-            << m_Options.getFileList()
             << m_Options.getProgramPath()
             << m_Options.getUrlAdressProgram()
             << m_Options.getUrlAdressPatterns();
@@ -66,13 +71,3 @@ bool SettingsClass::saveSettings()
 
 }
 
-bool SettingsClass::getChanceDeleteFileOrDir(QString &value)
-{
-    bool state = true;
-    foreach(QString str, m_Options.getFileList())
-    {
-        if(str == value) state = false;
-    }
-
-    return state;
-}

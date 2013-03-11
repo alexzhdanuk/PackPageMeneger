@@ -2,6 +2,7 @@
 #include <QDebug>
 #include "FtpDownload.h"
 #include <QMessageBox>
+#include <QApplication>
 
 FtpDownload::FtpDownload(QObject *parent) : QObject(parent)
 {
@@ -21,16 +22,25 @@ void FtpDownload::connectToServer(QString server,QString login,QString pass)
 
 }
 
-void FtpDownload::downloadFile(QString fileName, QString curPath)
+void FtpDownload::downloadFile(QString fileName,QString curPath ,QString directory)
 {
     ftp->connectToHost(m_server,21);
 
     ftp->login(m_login,m_pass);
     totalDownload = 0;
 
-    qDebug()<< fileName << curPath <<" ---ftp";
+    if(directory !="")
+    {
+        file = new QFile(QApplication::applicationDirPath()+directory+fileName);
+        curPath += directory;
+    }
+    else
+    {
+        file = new QFile(QApplication::applicationDirPath()+"/"+directory+fileName);
+    }
 
-    file = new QFile(fileName);
+
+
 
     if(file->open(QIODevice::WriteOnly))
     {
@@ -62,7 +72,8 @@ void FtpDownload::FtpFinished(int val,bool state)
     if(state)
     {
         QString error;
-        error = ftp->errorString().replace("\n", " ");
+        error = ftp->errorString();//.replace("\n", " ");
+        QMessageBox::critical(0,"Error Ftp",error);
         qDebug()<<error;
 
     }
