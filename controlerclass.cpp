@@ -79,15 +79,14 @@ void ControlerClass::ansverServerSlot(QNetworkReply *reply)
 
         parseString(string);
 
-        m_Settings->m_Options.getUpdateVersion();
+        qDebug()<<m_Settings->m_Options.getUpdateVersion();
         if(m_Settings->m_Options.getUpdateVersion() > m_Settings->m_Options.getLocalProgramVersion())
         {
             isUpdated = true;
-            //doUpdateProgram();
         }
         else
         {
-            //ShowMessage(QString("Your software is correct at the time of danniy!!!"));
+            QMessageBox::information(0,"Information",QString("Your software is correct at the time of danniy!!!"));
         }
     }
     else
@@ -127,6 +126,7 @@ void ControlerClass::addDataToTreeWidget(QTreeWidget* widget)
         itemUp->setText(0,"Update program");
         QTreeWidgetItem* childItemUp = new QTreeWidgetItem();
         childItemUp->setText(0,doc.elementsByTagName("version").at(0).toElement().text());
+        m_Settings->m_Options.setUpdateVersion(doc.elementsByTagName("version").at(0).toElement().text().toInt());
         itemUp->addChild(childItemUp);
         list << itemUp;
         QTreeWidgetItem* generalItem = new QTreeWidgetItem();
@@ -172,6 +172,8 @@ void ControlerClass::downloadFile()
     if(m_curentDownload == m_downloadList.count())
        {
            allFilesDownload = true;
+           m_Settings->m_Options.setLocalProgramVersion(m_Settings->m_Options.getUpdateVersion());
+           m_Settings->saveSettings();
            return;
        }
 
@@ -185,8 +187,8 @@ void ControlerClass::downloadFile()
            return;
 
        }
+
        m_FtpDownloader.downloadFile(m_downloadList.at(m_curentDownload),m_Settings->m_Options.getAbsPath(),"/tamplates/");
-       //m_FtpDownloader.downloadFile(m_Settings->m_Options.getProgramPath()+"/tamplates/"+m_downloadList.at(m_curentDownload),m_Settings->m_Options.getAbsPath()+"/tamplates/");
        m_curentDownload++;
        timer->start(1);
 

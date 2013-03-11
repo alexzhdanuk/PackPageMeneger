@@ -191,6 +191,7 @@ void Dialog::on_NextButton_clicked()
                 QMessageBox::information(0,"Downloading files!!!","Files are downloaded, finish updating is impossible!!!");
                 return;
             }
+
             close();
         }
         break;

@@ -71,23 +71,15 @@ void FtpDownload::FtpFinished(int val,bool state)
 {
     if(state)
     {
-        QString error;
-        error = ftp->errorString();//.replace("\n", " ");
-        QMessageBox::critical(0,"Error Ftp",error);
-        qDebug()<<error;
-
+        QMessageBox::critical(0,"Error Ftp",ftp->errorString());
     }
 
     if(ftp->currentCommand()==QFtp::Connected)
     {
         isConected = true;
-        qDebug()<<"conected";
-    }
+     }
 
-    if(ftp->currentCommand()==QFtp::Cd)
-    {
-        qDebug()<<"cd";
-    }
+
 
     if(ftp->currentCommand()==QFtp::Get)
     {
@@ -117,12 +109,12 @@ void FtpDownload::FinishedDownload(bool hasError)
           {
              case QFtp::HostNotFound:
              {
-                error = "не удалось обнаружить адрес";
+                QMessageBox::critical(0,"Error Ftp",ftp->errorString());
                 break;
              }
              default:
              {
-                error = ftp->errorString().replace("\n", " "); // errorString() часто содержит \n
+                QMessageBox::critical(0,"Error Ftp",ftp->errorString());
                 break;
              }
           }

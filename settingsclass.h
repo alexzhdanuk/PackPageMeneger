@@ -29,7 +29,7 @@ public:
     void setPass(QString value){m_pass = value;}
     void setDelList(QStringList value){m_listDelFiles = value;}
     void setAbsPath(QString value){m_absPath = value;}
-    void setFtpserver(QString value){m_ftpServer = value;}
+    void setFtpServer(QString value){m_ftpServer = value;}
 
 private:
     int m_localProgramVersion;
