@@ -4,7 +4,7 @@
 #include <QDebug>
 
 #define FILE_SETTINGS "settings.ini"
-#define NAME_PROGRAM "index.php"
+#define NAME_PROGRAM "Photobook.exe"
 
 
 SettingsClass::SettingsClass()

@@ -173,6 +173,7 @@ void ControlerClass::downloadFile()
            return;
        }
 
+       m_curentDownload++;
 
        if(!isDowloadProgram && isUpdated)
        {
@@ -184,8 +185,7 @@ void ControlerClass::downloadFile()
 
        }
 
-       m_FtpDownloader.downloadFile(m_downloadList.at(m_curentDownload),m_Settings->m_Options.getAbsPath(),"/tamplates/");
-       m_curentDownload++;
+       m_FtpDownloader.downloadFile(m_downloadList.at(m_curentDownload-1),m_Settings->m_Options.getAbsPath(),"/templates/");
        timer->start(1);
 
 }

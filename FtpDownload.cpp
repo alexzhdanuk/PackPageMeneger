@@ -45,8 +45,8 @@ void FtpDownload::downloadFile(QString fileName,QString curPath ,QString directo
     if(file->open(QIODevice::WriteOnly))
     {
 
-        ftp->cd(QString(curPath));
-        ftp->get(QString(fileName),file);
+        ftp->cd(curPath);
+        ftp->get(fileName,file);
         fileIsDownload = false;
     }
     else
