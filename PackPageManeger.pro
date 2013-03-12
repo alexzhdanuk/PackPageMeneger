@@ -24,3 +24,6 @@ HEADERS  += dialog.h \
     FtpDownload.h
 
 FORMS    += dialog.ui
+
+RESOURCES += \
+    resourses.qrc

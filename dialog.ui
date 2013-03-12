@@ -6,12 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>383</width>
-    <height>312</height>
+    <width>381</width>
+    <height>309</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>381</width>
+    <height>309</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>381</width>
+    <height>309</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog,QSplitter{background-image: url(:/background); background-repeat: no-repeat; }</string>
   </property>
   <widget class="QWidget" name="formLayoutWidget">
    <property name="geometry">
@@ -60,34 +75,33 @@
     <rect>
      <x>101</x>
      <y>55</y>
-     <width>181</width>
-     <height>101</height>
+     <width>151</width>
+     <height>91</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="LayoutQuestion">
     <property name="fieldGrowthPolicy">
      <enum>QFormLayout::FieldsStayAtSizeHint</enum>
     </property>
-    <item row="0" column="0">
-     <widget class="QSplitter" name="splitter_2">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
+    <item row="2" column="1">
+     <widget class="QRadioButton" name="radioButtonExitFromUpdate">
+      <property name="text">
+       <string>RadioButton</string>
       </property>
-      <widget class="QRadioButton" name="radioButtonStandartUpdate">
-       <property name="text">
-        <string>RadioButton</string>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButtonCustomUpdate">
-       <property name="text">
-        <string>RadioButton</string>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButtonExitFromUpdate">
-       <property name="text">
-        <string>RadioButton</string>
-       </property>
-      </widget>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QRadioButton" name="radioButtonStandartUpdate">
+      <property name="text">
+       <string>RadioButton</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QRadioButton" name="radioButtonCustomUpdate">
+      <property name="text">
+       <string>RadioButton</string>
+      </property>
      </widget>
     </item>
    </layout>
@@ -103,25 +117,24 @@
    </property>
    <layout class="QGridLayout" name="LayoutGeneralFormButtons">
     <item row="0" column="0">
-     <widget class="QSplitter" name="splitter">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+     <widget class="QPushButton" name="backButton">
+      <property name="text">
+       <string>PushButton</string>
       </property>
-      <widget class="QPushButton" name="backButton">
-       <property name="text">
-        <string>PushButton</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="NextButton">
-       <property name="text">
-        <string>PushButton</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="CanselButton">
-       <property name="text">
-        <string>PushButton</string>
-       </property>
-      </widget>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="NextButton">
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QPushButton" name="CanselButton">
+      <property name="text">
+       <string>PushButton</string>
+      </property>
      </widget>
     </item>
    </layout>
