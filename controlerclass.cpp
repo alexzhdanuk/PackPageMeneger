@@ -13,16 +13,12 @@ ControlerClass::ControlerClass(QObject *parent,const QString &programPath) :
         m_Settings = new SettingsClass();
         nam = new QNetworkAccessManager();
         isUpdated = false;
-        //m_Settings->saveSettings();
-        //m_Settings->loadSettings();
         m_Settings->m_Options.setProgramPath(programPath);
         timer = new QTimer(this);
         m_curentDownload = 0;
         isDowloadProgram = false;
         m_xmlFileIsSave = false;
         allFilesDownload = false;
-
-
 
         connect(timer, SIGNAL(timeout()), this, SLOT(onTimer()));
         connect(nam, SIGNAL(finished(QNetworkReply*)),this, SLOT(ansverServerSlot(QNetworkReply*)));
@@ -51,8 +47,10 @@ void ControlerClass::SendCommand(const QString &command)
 
 void ControlerClass::onTimer()
 {
-    int all_files = m_downloadList.count()+1;
-    QString str = QString::number(m_curentDownload+1);
+    int all_files;
+    if(isUpdated) all_files = m_downloadList.count()+1;
+    else all_files = m_downloadList.count();
+    QString str = QString::number(m_curentDownload);
     str+="/";
     str+=QString::number(all_files);
     m_progresLabel->setText(str);
@@ -62,11 +60,9 @@ void ControlerClass::onTimer()
     if(m_FtpDownloader.fileIsDownload)
     {
         timer->stop();
-        //if(isDowloadProgram) m_curentDownload++;
         isDowloadProgram = true;
         downloadFile();
     }
-
 }
 
 
@@ -160,7 +156,7 @@ void ControlerClass::addDataToTreeWidget(QTreeWidget* widget)
 
 void ControlerClass::DownloadUpdates(QLabel *label, QProgressBar *bar)
 {
-    RemoveProgram();
+    if(isUpdated) RemoveProgram();
     m_progresLabel = label;
     m_progresBar = bar;
     m_FtpDownloader.connectToServer(m_Settings->m_Options.getFtpServer(),m_Settings->m_Options.getLogin(),m_Settings->m_Options.getPass());
@@ -178,7 +174,7 @@ void ControlerClass::downloadFile()
        }
 
 
-       if(!isDowloadProgram)
+       if(!isDowloadProgram && isUpdated)
        {
            qDebug()<<m_Settings->m_Options.getUrlAdressProgram() << m_Settings->m_Options.getProgramPath();
            m_FtpDownloader.downloadFile(m_Settings->m_Options.getUrlAdressProgram(),m_Settings->m_Options.getAbsPath());
@@ -262,7 +258,6 @@ void ControlerClass::reLoadUpdateList()
             }
         }
     }
-
 }
 
 void ControlerClass::RemoveProgram()
@@ -274,5 +269,4 @@ void ControlerClass::RemoveProgram()
     {
         QFile(m_Settings->m_Options.getProgramPath()+"/"+str).remove();
     }
-
 }

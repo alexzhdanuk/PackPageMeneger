@@ -3,11 +3,15 @@
 #include <QDataStream>
 #include <QDebug>
 
+#define FILE_SETTINGS "settings.ini"
+#define NAME_PROGRAM "index.php"
+
+
 SettingsClass::SettingsClass()
 {
 
     QStringList list;
-    m_filePath = "settings.ini";
+    m_filePath = FILE_SETTINGS;
 
     m_Options.setLocalProgramVersion(10);
     m_Options.setServerAdress("http://sms-feed.apricus.pp.ua/FotobookUpdate/test.php");
@@ -15,7 +19,7 @@ SettingsClass::SettingsClass()
     m_Options.setLogin("zmey");
     m_Options.setPass("14101989");
     m_Options.setFtpServer("sms-feed.apricus.pp.ua");
-    m_Options.setUrlAdresProgram("index.php");
+    m_Options.setUrlAdresProgram(NAME_PROGRAM);
     m_Options.setProgramPath("./www/sms-feed.apricus.pp.ua/fotobook");
     m_Options.setAbsPath("./www/sms-feed.apricus.pp.ua/fotobook");
 
@@ -24,7 +28,7 @@ SettingsClass::SettingsClass()
 
     m_Options.setUrlAdresPatterns(list);
     list.clear();
-    list << "index.php";
+    list << NAME_PROGRAM;
     m_Options.setDelList(list);
     loadSettings();
 }
@@ -42,7 +46,6 @@ bool SettingsClass::loadSettings()
         QStringList listPat, listDel;
         int programVersion,updateVersion;
         QDataStream in(&file);
-        //in >> m_Options;
 
 
         in >> programVersion
